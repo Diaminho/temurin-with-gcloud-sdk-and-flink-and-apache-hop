@@ -1,13 +1,12 @@
 FROM ghcr.io/choss/temurin-with-gcloud-sdk-and-flink:main
 
-RUN mkdir -p /opt/apache-hop/ && cd /opt/apache-hop && wget -nv -O apache-hop.zip 'https://www.apache.org/dyn/closer.cgi?filename=hop/2.7.0/apache-hop-client-2.7.0.zip&action=download' \
+RUN mkdir -p /opt/apache-hop/ && cd /opt/apache-hop && wget -nv -O apache-hop.zip 'https://archive.apache.org/dist/hop/2.4.0/apache-hop-client-2.4.0.zip' \
     && apt-get update && apt-get install -y unzip && apt-get clean \
     && ln -s . hop && unzip apache-hop.zip && rm hop && rm apache-hop.zip \
 	&& mkdir /opt/apache-hop/BQ_JDBC \
 	&& cd /opt/apache-hop/BQ_JDBC \ 
 	&& wget -nv -O bq-jdbc-driver.zip https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.5.2.1005.zip \
 	&& unzip bq-jdbc-driver.zip \
-	&& mv GoogleBigQueryJDBC42.jar /opt/apache-hop/lib/jdbc/ \
 	&& mv *.jar /opt/apache-hop/lib/core/ \
 	&& rm -rf /opt/apache-hop/BQ_JDBC
 
