@@ -10,8 +10,8 @@ RUN mkdir -p /opt/apache-hop/ && cd /opt/apache-hop && wget -nv -O apache-hop.zi
 	&& mv *.jar /opt/apache-hop/lib/core/ \
 	&& rm -rf /opt/apache-hop/BQ_JDBC
 
-# custom json transformation plugin. Needed for apache hop versions LESS than 2.7.0
-COPY hop/plugins/hop-transform-json-2.4.0.jar /opt/apache-hop/plugins/transforms/json/
+# custom hop plugins.
+COPY hop/plugins/ /opt/apache-hop/plugins/
 
 ENV PATH=/opt/k8s:/opt/google-cloud-sdk/bin:/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENTRYPOINT ["/__cacert_entrypoint.sh"]
